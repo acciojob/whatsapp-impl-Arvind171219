@@ -2,32 +2,31 @@ package com.driver;
 
 import java.util.*;
 
-import org.apache.catalina.util.ParameterMap;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class WhatsappRepository {
 
     //Assume that each user belongs to at most one group
-    //You can use the below-mentioned hashmaps or delete these and create your own.
+    //You can use the below mentioned hashmaps or delete these and create your own.
     private HashMap<Group, List<User>> groupUserMap;
     private HashMap<Group, List<Message>> groupMessageMap;
     private HashMap<Message, User> senderMap;
     private HashMap<Group, User> adminMap;
-    private HashSet<String> userMobile;
+    private HashMap<String, User> userData;
     private int customGroupCount;
     private int messageId;
-    private ParameterMap<Object, Object> userData;
 
     public WhatsappRepository(){
         this.groupMessageMap = new HashMap<Group, List<Message>>();
         this.groupUserMap = new HashMap<Group, List<User>>();
         this.senderMap = new HashMap<Message, User>();
         this.adminMap = new HashMap<Group, User>();
-        this.userMobile = new HashSet<>();
+        this.userData = new HashMap<>();
         this.customGroupCount = 0;
         this.messageId = 0;
     }
+
     public boolean isNewUser(String mobile) {
         if(userData.containsKey(mobile)) return false;
         return true;
@@ -90,4 +89,6 @@ public class WhatsappRepository {
 
         return false;
     }
+
+
 }
